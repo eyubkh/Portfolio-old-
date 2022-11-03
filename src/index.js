@@ -1,6 +1,7 @@
 import './index.css'
 import resize from './utils/resize'
 import monitorModel from './public/monitor.glb'
+import booksModel from './public/scene.gltf'
 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -9,7 +10,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 const canvas = window.document.getElementById('canvas')
 const renderer = new THREE.WebGLRenderer({ canvas })
 
-renderer.setClearColor(0xffffff, 1)
+renderer.setClearColor(0x333333, 1)
 
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
@@ -37,12 +38,20 @@ obj.load(monitorModel, (gltf) => {
   object.scale.set(0.01, 0.01, 0.01)
   object.position.y = 1.3
   object.rotateY(Math.PI / -2)
+  // scene.add(object)
+})
+
+const books = new GLTFLoader()
+books.load(booksModel, (gltf) => {
+  const object = gltf.scene
+  console.log(object)
+  object.position.set(0,0,0)
   scene.add(object)
 })
 
-// const controls = new OrbitControls(camera, renderer.domElement)
-// controls.target.set(0, 0, 0)
-// controls.update()
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.target.set(0, 0, 0)
+controls.update()
 
 function render () {
   window.requestAnimationFrame(render)
@@ -51,7 +60,7 @@ function render () {
     camera.aspect = canvas.clientWidth / canvas.clientHeight
     camera.updateProjectionMatrix()
   }
-  // controls.update()
+  controls.update()
   renderer.render(scene, camera)
 }
 
