@@ -1,9 +1,10 @@
 import './index.css'
 import resize from './utils/resize'
-import monitorModel from './public/monitor.glb'
-import booksModel from './public/book.glb'
+import monitorModel from './public/monitor.gltf'
+import booksModel from './public/book.gltf'
 import dumbellModel from './public/dumbell.gltf'
 import clockModel from './public/clock.gltf'
+import tableModel from './public/table.gltf'
 
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
@@ -36,11 +37,9 @@ scene.add(planeMesh)
 
 const group = new THREE.Group()
 
-const obj = new GLTFLoader()
-obj.load(monitorModel, (gltf) => {
+const monitor = new GLTFLoader()
+monitor.load(monitorModel, (gltf) => {
   const object = gltf.scene
-  object.scale.set(0.01, 0.01, 0.01)
-  object.position.y = 1.3
   object.rotateY(Math.PI / -2)
   group.add(object)
 })
@@ -48,10 +47,8 @@ obj.load(monitorModel, (gltf) => {
 const books = new GLTFLoader()
 books.load(booksModel, (gltf) => {
   const object = gltf.scene
-  object.scale.set(0.1, 0.1, 0.1)
-  object.position.set(1.5, .73, -.2)
-  object.rotateZ(90)
-  object.rotateY(Math.PI)
+  object.rotateY(Math.PI / -2)
+
   group.add(object)
 })
 
@@ -72,12 +69,20 @@ clock.load(clockModel, (gltf) => {
   group.add(object)
 })
 
+const table = new GLTFLoader()
+table.load(tableModel, (gltf) => {
+  const object = gltf.scene
+  object.rotateY(-Math.PI/2)
+  object.scale.set(1,1,1)
+  group.add(object)
+})
+
 group.position.set(.3,0,0)
 scene.add(group)
 
-// const controls = new OrbitControls(camera, renderer.domElement)
-// controls.target.set(0, 0, 0)
-// controls.update()
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.target.set(0, 0, 0)
+controls.update()
 
 function render () {
   window.requestAnimationFrame(render)
@@ -86,7 +91,7 @@ function render () {
     camera.aspect = canvas.clientWidth / canvas.clientHeight
     camera.updateProjectionMatrix()
   }
-  // controls.update()
+  controls.update()
   renderer.render(scene, camera)
 }
 

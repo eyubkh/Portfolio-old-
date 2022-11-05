@@ -15,5 +15,6 @@ Site map:
   - Contact
 
 ![image 1](./pics/1.png)
+![image 2](./pics/2.png)
 
 
