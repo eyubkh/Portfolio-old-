@@ -22,11 +22,6 @@ module.exports = {
       template: Path.resolve(__dirname, '../src/index.html')
     })
   ],
-  resolve: {
-    alias: {
-      '~': Path.resolve(__dirname, '../src')
-    }
-  },
   module: {
     rules: [
       {
