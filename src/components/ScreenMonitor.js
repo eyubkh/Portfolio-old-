@@ -2,23 +2,23 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { CSS3DObject, CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer'
 
-const SCREEN_SIZE = { w: 1280, h: 1024 }
-const IFRAME_PADDING = 32
-const IFRAME_SIZE = {
-  w: SCREEN_SIZE.w - IFRAME_PADDING,
-  h: SCREEN_SIZE.h - IFRAME_PADDING
-}
-
 export default class ScreenMonitor {
-  constructor (scene, camera) {
+  sSize = { w: 1280, h: 1052.44 }
+  iframePadding = 32
+  iframeSize = {
+    w: this.sSize.w - this.iframePadding,
+    h: this.sSize.h - this.iframePadding
+  }
+
+  constructor (scene, camera, monitorPosition) {
     this.cssScene = new THREE.Scene()
     this.scene = scene
     this.camera = camera
     this.cssRenderer = new CSS3DRenderer()
-    this.position = new THREE.Vector3(0, 1, 11)
-    this.scale = new THREE.Vector3(0.1, 0.1, 0.1)
-    this.rotation = new THREE.Euler(-0.06, 0, 0)
-    this.screenSize = new THREE.Vector2(SCREEN_SIZE.w, SCREEN_SIZE.h)
+    this.position = new THREE.Vector3(-50, 0, 470).add(monitorPosition)
+    this.scale = new THREE.Vector3(1, 1, 1)
+    this.rotation = new THREE.Euler(-0.05, 0, 0)
+    this.screenSize = new THREE.Vector2(this.sSize.w, this.sSize.h)
 
     this.init()
   }
@@ -27,8 +27,8 @@ export default class ScreenMonitor {
     this.cssRenderer.setSize(window.innerWidth, window.innerHeight)
     document.querySelector('#css').appendChild(this.cssRenderer.domElement)
 
-    const controls = new OrbitControls(this.camera, this.cssRenderer.domElement)
-    controls.update()
+    // const controls = new OrbitControls(this.camera, this.cssRenderer.domElement)
+    // controls.update()
 
     const object = this.createCSS3DObject()
     object.position.copy(this.position)
@@ -41,6 +41,7 @@ export default class ScreenMonitor {
       blending: THREE.NoBlending,
       side: THREE.DoubleSide
     })
+
     const geometry = new THREE.PlaneGeometry(this.screenSize.width, this.screenSize.height)
     const mesh = new THREE.Mesh(geometry, material)
     mesh.position.copy(this.position)
@@ -54,10 +55,12 @@ export default class ScreenMonitor {
   }
 
   createCSS3DObject () {
-    const wrapper = document.createElement('div')
-    wrapper.style.width = this.screenSize.width + 'px'
-    wrapper.style.height = this.screenSize.height + 'px'
-    wrapper.style.backgroundColor = 'blue'
+    const wrapper = document.createElement('iframe')
+    wrapper.src = 'https://henryheffernan-os.vercel.app'
+    wrapper.style.backgroundColor = 'white'
+    wrapper.style.padding = this.iframePadding + 'px'
+    wrapper.style.width = this.iframeSize.w + 'px'
+    wrapper.style.height = this.iframeSize.h + 'px'
 
     const object = new CSS3DObject(wrapper)
     return object
