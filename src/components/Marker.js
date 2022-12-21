@@ -47,7 +47,7 @@ class Marker {
     this.delta = this.clock.getDelta()
 
     this.size += this.delta * 4
-    this.opacity -= this.delta * 1.5
+    this.opacity -= this.delta * 1.2
     this.spandMesh.scale.set(this.size, this.size, this.size)
     this.spandMesh.material.opacity = this.opacity
 
