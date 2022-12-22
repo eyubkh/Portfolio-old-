@@ -11,7 +11,7 @@ class Monitor {
     this.position = new THREE.Vector3(0, 1240, -350)
     this.screenMonitor = new ScreenMonitor(this.scene, this.camera, this.position)
     this.markerPosition = new THREE.Vector3(1000, -800, 700).add(this.position)
-    this.marker = new Marker(this.markerPosition, this.position)
+    this.marker = new Marker(this.markerPosition, this.position, camera)
   }
 
   init () {

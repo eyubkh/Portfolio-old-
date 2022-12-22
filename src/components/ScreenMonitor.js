@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { CSS3DObject, CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer'
 
 export default class ScreenMonitor {
@@ -26,9 +25,6 @@ export default class ScreenMonitor {
   init () {
     this.cssRenderer.setSize(window.innerWidth, window.innerHeight)
     document.querySelector('#css').appendChild(this.cssRenderer.domElement)
-
-    // const controls = new OrbitControls(this.camera, this.cssRenderer.domElement)
-    // controls.update()
 
     const object = this.createCSS3DObject()
     object.position.copy(this.position)
