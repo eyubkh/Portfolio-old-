@@ -4,6 +4,8 @@ node_modules
 # misc
 .DS_Store
 
+build
+
 src/public
 npm-debug.log
 yarn-error.log
