@@ -34,7 +34,11 @@ module.exports = {
         loader: 'html-loader'
       },
       {
-        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|obj|ttf|woff|gltf|glb|woff2)(\?.*)?$/,
+        test: /\.(gltf)$/,
+        loader: 'gltf-loader'
+      },
+      {
+        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|webp|svg|obj|ttf|woff|glb|woff2)(\?.*)?$/,
         type: 'asset'
       }
     ]
