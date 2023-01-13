@@ -6,7 +6,6 @@ node_modules
 
 build
 
-src/public
 npm-debug.log
 yarn-error.log
 yarn.lock
