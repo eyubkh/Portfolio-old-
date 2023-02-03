@@ -1,4 +1,4 @@
-<div id="des">
+<div id="desc">
     <h1>Welcome</h2>
     <h2>I'm Ayoub Khalfaoui Hadi</h4>
     <p>I am a self-taught student with a goal of becoming a software engineer. My strong interest in computer science drives me to constantly improve my skills and knowledge through self-study and staying up-to-date on the latest technologies and programming languages. I am highly motivated and dedicated to achieving success in this field.</p>
