@@ -7,6 +7,23 @@
     <h1 >About Me</h2>
     <p>I am living in the United Kingdom, but I was born in Spain and have family from Morocco , so I have a diverse cultural background. I've always felt that I don't really belong to any one specific place, and that's why I love traveling and learning about other cultures.</p>
     <p>I also enjoy staying active and do sport at the gym regularly. I find it not only keeps me physically fit, but it also helps me to clear my mind and reduce stress. In my free time, I also love being outside and spending time in nature.</p>
+    <ul>
+    <li>
+      <a href="https://englicus.vercel.app/" target="_blank">
+      <b>[Site]</b> - Portfolio
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/eyubkh" target="_blank">
+      <b>[Github]</b> - Developer profile 
+      </a>
+    </li>
+    <li>
+      <a href="https://www.linkedin.com/in/eyubkh/" target="_blank">
+      <b>[Linkedin]</b> - Job profile
+      </a>
+    </li>
+  </ul>
 </div>
 
 # Portfolio
