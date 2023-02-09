@@ -53,7 +53,7 @@ export default class ScreenMonitor {
   createCSS3DObject () {
     const wrapper = document.createElement('iframe')
     wrapper.src = 'https://portfolio-environment.vercel.app/os'
-    wrapper.style.backgroundColor = 'white'
+    wrapper.style.backgroundColor = 'black'
     wrapper.style.padding = this.iframePadding + 'px'
     wrapper.style.width = this.iframeSize.w + 'px'
     wrapper.style.height = this.iframeSize.h + 'px'
