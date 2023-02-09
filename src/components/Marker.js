@@ -1,14 +1,15 @@
 import * as THREE from 'three'
 
 class Marker {
+  materialColor = { color: 'white' }
   constructor (position, modelPosition, camera) {
     this.modelPosition = modelPosition
     this.position = position
 
     this.geometry = new THREE.SphereGeometry(50, 32, 16)
-    this.material = new THREE.MeshStandardMaterial({ color: 'blue' })
+    this.material = new THREE.MeshStandardMaterial(this.materialColor)
     this.markerMesh = new THREE.Mesh(this.geometry, this.material)
-    this.expandMesh = new THREE.Mesh(this.geometry, new THREE.MeshStandardMaterial({ color: 'blue' }))
+    this.expandMesh = new THREE.Mesh(this.geometry, new THREE.MeshStandardMaterial(this.materialColor))
 
     this.raycaster = new THREE.Raycaster()
     this.pointer = new THREE.Vector2()
@@ -70,7 +71,7 @@ class Marker {
     }
 
     if (this.intersects?.clicked) {
-      camera.position.lerp(new THREE.Vector3(0, 1240, 1100), 0.05)
+      camera.position.lerp(new THREE.Vector3(0, 1240, 850), 0.05)
     } else {
       camera.position.lerp(new THREE.Vector3(0, 5040, 5000), 0.05)
     }
