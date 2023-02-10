@@ -9,7 +9,7 @@
     <p>I also enjoy staying active and do sport at the gym regularly. I find it not only keeps me physically fit, but it also helps me to clear my mind and reduce stress. In my free time, I also love being outside and spending time in nature.</p>
     <ul>
     <li>
-      <a href="https://englicus.vercel.app/" target="_blank">
+      <a href="https://eyubkh.github.io/" target="_blank">
       <b>[Site]</b> - Portfolio
       </a>
     </li>
