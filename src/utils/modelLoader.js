@@ -1,10 +1,11 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { manager } from './loadingManager'
 
 class ModelLoader {
   constructor (model) {
     this.model = model
-    this.loader = new GLTFLoader()
+    this.loader = new GLTFLoader(manager)
     this.scale = 700
     this.position = new THREE.Vector3(0, 0, 0)
     this.rotation = new THREE.Euler(0, -Math.PI / 2, 0)
