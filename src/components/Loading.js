@@ -1,66 +1,34 @@
 import '../styles/loading.css'
+import image from '../public/win3-1.png'
+import sound from '../public/winSound.mp3'
 
-class Loading {
-  constructor () {
-    this.main = ''
-    this.objects = []
-    this.phase = false
-    this.done = false
-    this.loadingElement = document.getElementById('loading')
-  }
+const loadingData = {
+  firstPhase: [
+    '<p>Hold the CTRL key down to boot from a floppy...</p>',
+    `<div class="blue-block">
+      <p>COPYRIGHT 1993,1994 MICRO HOUSE INTERNATIONL</p>
+      <ul>
+        <li>Maximum Overdrive (tm) (0,1)</li>
+        <li>528 Million byte Drive Support (1)</li>
+        <li>Custom DRive Type (1)</li>
+      </ul>
+    </div>`,
+    '<p>Starting MS-DOS</p>',
+    '<p>MIMEM is testing extended memory... </p>'
+  ],
+  loadState: {
+    value: '<p>MIMEM is testing extended memory... </p>',
+    done: '<p>MIMEM is testing extended memory... done.</p>',
+    error: '<p>MIMEM is testing extended memory... error.</p>'
 
-  async init () {
-    this.firstPhase()
-  }
-
-  addText (string) {
-    return new Promise((resolve) => {
-      const min = 500
-      const max = 1000
-      const speed = Math.random() * (max - min) + min
-      setTimeout(() => {
-        this.main = this.main.concat('  ', string)
-        this.update()
-        resolve()
-      }, speed)
-    })
-  }
-
-  async firstPhase () {
-    await this.addText('<p>Hold the CTRL key down to boot from a floppy...</p>')
-    await this.addText(
-          `<div id="blue-block">
-            <p>COPYRIGHT 1993,1994 MICRO HOUSE INTERNATIONL</p>
-            <ul>
-              <li>Maximum Overdrive(tm) (0,1)</li>
-              <li>528 Million byte Drive Support (1)</li>
-              <li>Custom DRive Type (1)</li>
-            </ul>
-          </div>`)
-    await this.addText('<p>Starting MS-DOS</p>')
-    await this.addText('<p>MIMEM is testing extended memory... </p>')
-      .then(() => {
-        this.phase = true
-        this.update()
-      })
-  }
-
-  async secondPhase () {
-    this.main = this.main.replace('<p>MIMEM is testing extended memory... </p>', '<p>MIMEM is testing extended memory... done.</p>')
-    this.update()
-
-    await this.addText(
-      `
-      <div>
+  },
+  secondPhase: [
+    `<div>
         <p>Microsoft Power Manager Version 1.00     CPQ</p>
         <p>Copyright Micorsoft Corporation 1986, 1992</p>
         <p>Copyright Compag Computer Corporation 1992</p>
-      </div>
-      `
-    )
-    await this.addText(
-      `
-      <div>
+      </div>`,
+      `<div>
         <p>CD-ROM Device Drive Verision 4.12</p>
         <p>Copyright (C) Creative Techology Ltd, and</p>
         <p>Copyright (C) Matsuhita-Kotobuki Electroics Industires, Ltd.</p>
@@ -70,28 +38,132 @@ class Loading {
           <p> unit: 0 id: 0 MATSUHITA CD-ROM CR-563-x 0.75</p>
         <p>1 CD-ROM drive(s) connected.</p>
         <p>CD-ROM device driver installed</p>
-      </div>
+      </div>`,
       `
-    )
-    await new Promise((resolve) => {
-      this.objects.forEach(async (obj) => {
-        await this.addText(`<p>${obj}</p>`)
-      })
+    <div>
+    <p>Mouse Drive - Release 6.23                  Standard Version</p>
+    <p>Copyright (C) 1984, 1993 Logitech Inc. All right reserved.</p>
+    </div>`,
+    `<div>
+    <p>Reading LMOUSE.INI initialisation file…</p>
+    <p>Searching for mouse…</p>
+    </div>
+    `,
+    `<div>
+    <p>C:\\>rem C:\\WINDOWS/\\\\WIN</p>
+    <p>C:\\>LW /L:1,46576 C:\\DOS\\MSCDEX.EXE /D:MESCD001 /V /M:15</p>
+    </div>`
+  ],
+  image: `<img src="${image}" alt="Windows 3.1 Logo Type" />`
+}
+
+class Loading {
+  terminalText = ''
+  isFirstPhaseDone = false
+  loadingElement = document.getElementById('loading')
+
+  constructor () {
+    this.objects = []
+    this.isLoadDone = false
+    this.isLoadError = false
+  }
+
+  async init () {
+    this.firstPhase()
+  }
+
+  addTerminalText (string, time) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.terminalText += string
+        this.update()
+        resolve()
+      }, time)
+    })
+  }
+
+  addImage () {
+    return new Promise((resolve) => {
+      this.terminalText = loadingData.image
+      this.update()
       resolve()
     })
-      .then(() => {
-        setTimeout(() => {
-          this.loadingElement.style.display = 'none'
-        }, 2000)
-      })
+  }
+
+  async firstPhase () {
+    await this.addTerminalText(loadingData.firstPhase[0], 300)
+    await this.addTerminalText(loadingData.firstPhase[1], 1000)
+    await this.addTerminalText(loadingData.firstPhase[2], 300)
+    await this.addTerminalText(loadingData.firstPhase[3], 200)
+    this.isFirstPhaseDone = true
+    this.update()
+  }
+
+  async handlerLoadState (string) {
+    await new Promise((resolve) => {
+      this.terminalText = this.terminalText.replace(loadingData.loadState.value, string)
+      this.update()
+      resolve()
+    })
+  }
+
+  async clearTerminal (time) {
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        this.terminalText = ''
+        resolve()
+      }, time)
+    })
+  }
+
+  async secondPhase () {
+    await this.addTerminalText(loadingData.secondPhase[0], 500)
+    await this.addTerminalText(loadingData.secondPhase[1], 300)
+    await this.generateLoadObjects()
+    await this.addTerminalText(loadingData.secondPhase[2], 300)
+    await this.addTerminalText(loadingData.secondPhase[3], 300)
+    await this.clearTerminal(400)
+    await this.addTerminalText(loadingData.secondPhase[4], 400)
+    await this.clearTerminal(500)
+    await this.addImage()
+    await this.loadingDone(1200)
+  }
+
+  startUpSound () {
+    const audio = new Audio(sound)
+    audio.volume = 0.3
+    audio.play()
+  }
+
+  async generateLoadObjects () {
+    for (const obj of this.objects) {
+      const speed = Math.random() * (0 - 150) + 150
+      await this.addTerminalText(`<p>${obj}</p>`, speed)
+    }
+  }
+
+  async loadingDone (time) {
+    this.startUpSound()
+    await new Promise((resolve) => {
+      setTimeout(() => {
+        this.loadingElement.style.display = 'none'
+        resolve()
+      }, time)
+    })
   }
 
   async _app () {
-    if (this.done && this.phase) {
-      this.done = false
+    if (this.isLoadDone && this.isFirstPhaseDone) {
+      this.isLoadDone = false
+      await this.handlerLoadState(loadingData.loadState.done)
       await this.secondPhase()
     }
-    return this.main
+
+    if (this.error && this.isFirstPhaseDone) {
+      this.error = false
+      await this.handlerLoadState(loadingData.loadState.error)
+    }
+    return this.terminalText + '<div class="cursor"></div>'
   }
 
   async update () {
