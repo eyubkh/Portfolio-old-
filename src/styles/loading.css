@@ -4,17 +4,21 @@
 }
 
 #loading p {
-  margin-bottom: 18px;
+  margin-bottom: 32px;
 }
 #loading div {
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+}
+
+#loading div > p {
+  margin-bottom: 0px;
 }
 
 #loading {
   position: absolute;
   font-family: winFont, 'Times New Roman', Times, serif;
   font-size: 28px;
-  padding: 32px;
+  padding: 46px;
   min-height: 100vh;
   width: 100vw;
   background-color: black;
