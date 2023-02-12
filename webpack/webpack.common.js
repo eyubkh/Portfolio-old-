@@ -34,7 +34,7 @@ module.exports = {
         loader: 'html-loader'
       },
       {
-        test: /\.(ico|jpg|jpeg|png|gif|eot|otf|gltf|webp|svg|obj|ttf|woff|glb|woff2)(\?.*)?$/,
+        test: /\.(ico|jpg|mp3|jpeg|png|gif|eot|otf|gltf|webp|svg|obj|ttf|woff|glb|woff2)(\?.*)?$/,
         type: 'asset'
       }
     ]
