@@ -1,16 +1,15 @@
 import '../styles/loading.css'
 import image from '../public/win3-1.png'
-import sound from '../public/winSound.mp3'
 
 const loadingData = {
   firstPhase: [
     '<p>Hold the CTRL key down to boot from a floppy...</p>',
     `<div class="blue-block">
-      <p>COPYRIGHT 1993,1994 MICRO HOUSE INTERNATIONL</p>
+      <p>COPYRIGHT 1993,1994 KHALFAOUI INTERNATIONL</p>
       <ul>
         <li>Maximum Overdrive (tm) (0,1)</li>
         <li>528 Million byte Drive Support (1)</li>
-        <li>Custom DRive Type (1)</li>
+        <li>Custom Drive Type (1)</li>
       </ul>
     </div>`,
     '<p>Starting MS-DOS</p>',
@@ -63,13 +62,13 @@ class Loading {
   loadingElement = document.getElementById('loading')
 
   constructor () {
-    this.objects = []
     this.isLoadDone = false
     this.isLoadError = false
   }
 
   async init () {
-    this.firstPhase()
+    // this.firstPhase()
+    this.removeTerminal()
   }
 
   addTerminalText (string, time) {
@@ -82,29 +81,18 @@ class Loading {
     })
   }
 
-  addImage () {
-    return new Promise((resolve) => {
-      this.terminalText = loadingData.image
-      this.update()
-      resolve()
-    })
-  }
-
   async firstPhase () {
     await this.addTerminalText(loadingData.firstPhase[0], 300)
     await this.addTerminalText(loadingData.firstPhase[1], 1000)
-    await this.addTerminalText(loadingData.firstPhase[2], 300)
-    await this.addTerminalText(loadingData.firstPhase[3], 200)
+    await this.addTerminalText(loadingData.firstPhase[2], 400)
+    await this.addTerminalText(loadingData.firstPhase[3], 300)
     this.isFirstPhaseDone = true
     this.update()
   }
 
-  async handlerLoadState (string) {
-    await new Promise((resolve) => {
-      this.terminalText = this.terminalText.replace(loadingData.loadState.value, string)
-      this.update()
-      resolve()
-    })
+  handlerLoadState (string) {
+    this.terminalText = this.terminalText.replace(loadingData.loadState.value, string)
+    this.update()
   }
 
   async clearTerminal (time) {
@@ -117,51 +105,30 @@ class Loading {
   }
 
   async secondPhase () {
-    await this.addTerminalText(loadingData.secondPhase[0], 500)
+    this.handlerLoadState(loadingData.loadState.done)
+    await this.addTerminalText(loadingData.secondPhase[0], 1000)
     await this.addTerminalText(loadingData.secondPhase[1], 300)
-    await this.generateLoadObjects()
-    await this.addTerminalText(loadingData.secondPhase[2], 300)
+    await this.addTerminalText(loadingData.secondPhase[2], 400)
     await this.addTerminalText(loadingData.secondPhase[3], 300)
-    await this.clearTerminal(400)
-    await this.addTerminalText(loadingData.secondPhase[4], 400)
-    await this.clearTerminal(500)
-    await this.addImage()
-    await this.loadingDone(1200)
+    await this.clearTerminal(300)
+    this.removeTerminal(2000)
   }
 
-  startUpSound () {
-    const audio = new Audio(sound)
-    audio.volume = 0.3
-    audio.play()
-  }
-
-  async generateLoadObjects () {
-    for (const obj of this.objects) {
-      const speed = Math.random() * (0 - 150) + 150
-      await this.addTerminalText(`<p>${obj}</p>`, speed)
-    }
-  }
-
-  async loadingDone (time) {
-    this.startUpSound()
-    await new Promise((resolve) => {
-      setTimeout(() => {
-        this.loadingElement.style.display = 'none'
-        resolve()
-      }, time)
-    })
+  removeTerminal (time) {
+    setTimeout(() => {
+      this.loadingElement.style.display = 'none'
+    }, time)
   }
 
   async _app () {
     if (this.isLoadDone && this.isFirstPhaseDone) {
       this.isLoadDone = false
-      await this.handlerLoadState(loadingData.loadState.done)
       await this.secondPhase()
     }
 
     if (this.error && this.isFirstPhaseDone) {
       this.error = false
-      await this.handlerLoadState(loadingData.loadState.error)
+      this.handlerLoadState(loadingData.loadState.error)
     }
     return this.terminalText + '<div class="cursor"></div>'
   }
