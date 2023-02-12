@@ -18,12 +18,9 @@ class Monitor {
     const monitorModel = new ModelLoader(model, this.position)
     monitorModel.setPosition(this.position)
     monitorModel.render(this.scene)
-
-    this.marker.render(this.scene)
   }
 
   render () {
-    this.marker.animate(this.camera)
     this.screenMonitor.render()
   }
 }
