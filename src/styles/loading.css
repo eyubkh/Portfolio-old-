@@ -1,11 +1,18 @@
-#loading p,
+@font-face {
+  font-family: 'winFont';
+  src: url('../public/w95fa.woff');
+}
+
+#loading p {
+  margin-bottom: 18px;
+}
 #loading div {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 #loading {
   position: absolute;
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: winFont, 'Times New Roman', Times, serif;
   font-size: 28px;
   padding: 32px;
   min-height: 100vh;
@@ -17,7 +24,7 @@
   box-sizing: border-box;
 }
 
-#blue-block {
+#loading .blue-block {
   display: inline-grid;
   background-color: blue;
   padding: 16px;
@@ -28,5 +35,32 @@
 #loading ul {
   display: inline;
   margin-left: 32px;
+  list-style-type: square;
+}
 
+
+#loading img {
+  margin: auto auto;
+}
+
+#loading .cursor {
+  width: 15px;
+  height: 3px;
+  background-color: white;
+  animation: cursor infinite .8s;
+}
+
+@keyframes cursor {
+  0% {
+    opacity: 0;
+  } 
+  40% {
+    opacity: 0;
+  }
+  60% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
