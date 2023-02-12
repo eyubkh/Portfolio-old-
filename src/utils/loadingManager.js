@@ -14,10 +14,6 @@ manager.onLoad = function () {
   loading.update()
 }
 
-manager.onProgress = function (_url, itemsLoaded, itemsTotal) {
-  loading.objects.push(`C:\\>rem SET OBJECT ${itemsLoaded} OF ${itemsTotal}`)
-}
-
 manager.onError = function () {
   loading.isLoadError = true
   loading.update()
