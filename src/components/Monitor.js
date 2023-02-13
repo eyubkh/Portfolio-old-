@@ -1,17 +1,17 @@
 import * as THREE from 'three'
 import model from '../public/monitor.gltf'
 import ModelLoader from '../utils/modelLoader'
-import Marker from './Marker'
 import ScreenMonitor from './ScreenMonitor'
 
 class Monitor {
-  constructor (scene, camera) {
+  constructor (scene, camera, cssScene) {
     this.scene = scene
     this.camera = camera
+    this.cssScene = cssScene
     this.position = new THREE.Vector3(0, 1240, -350)
-    this.screenMonitor = new ScreenMonitor(this.scene, this.camera, this.position)
-    this.markerPosition = new THREE.Vector3(1000, -800, 700).add(this.position)
-    this.marker = new Marker(this.markerPosition, this.position, camera)
+    this.screenMonitor = new ScreenMonitor(this.scene, this.camera, this.position, this.cssScene)
+
+    this.init()
   }
 
   init () {
