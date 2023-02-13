@@ -4,6 +4,8 @@ import model from '../public/env.gltf'
 class Environment {
   constructor (scene) {
     this.scene = scene
+
+    this.init()
   }
 
   init () {

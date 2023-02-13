@@ -12,6 +12,8 @@ class Lighting {
     this.topLight = new THREE.DirectionalLight(this.lightColor, this.lightIntesity * 0.6)
     this.frontLight = new THREE.DirectionalLight(this.lightColor, this.lightIntesity)
     this.ambientLight = new THREE.AmbientLight(this.ambientColor, this.ambientIntesity)
+
+    this.init()
   }
 
   init () {
