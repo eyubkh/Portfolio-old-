@@ -1,53 +1,54 @@
 import * as THREE from 'three'
-import { CSS3DObject, CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer'
+import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer'
+import AnimationZoom from '../utils/animationZoom'
 
-export default class ScreenMonitor {
-  sSize = { w: 1280, h: 1052.44 }
+class ScreenMonitor {
+  screenSize = { w: 1280, h: 1052.44 }
   iframePadding = 32
   iframeSize = {
-    w: this.sSize.w - this.iframePadding,
-    h: this.sSize.h - this.iframePadding
+    w: this.screenSize.w - this.iframePadding,
+    h: this.screenSize.h - this.iframePadding
   }
 
-  constructor (scene, camera, monitorPosition) {
-    this.cssScene = new THREE.Scene()
+  constructor (scene, camera, monitorPosition, cssScene) {
     this.scene = scene
     this.camera = camera
-    this.cssRenderer = new CSS3DRenderer()
+    this.cssScene = cssScene
+
     this.position = new THREE.Vector3(-50, 0, 470).add(monitorPosition)
     this.scale = new THREE.Vector3(1, 1, 1)
     this.rotation = new THREE.Euler(-0.05, 0, 0)
-    this.screenSize = new THREE.Vector2(this.sSize.w, this.sSize.h)
 
-    this.init()
-  }
+    this.CSS3DObject = this.createCSS3DObject()
 
-  init () {
-    this.cssRenderer.setSize(window.innerWidth, window.innerHeight)
-    document.querySelector('#css').appendChild(this.cssRenderer.domElement)
-
-    const object = this.createCSS3DObject()
-    object.position.copy(this.position)
-    object.scale.copy(this.scale)
-    object.rotation.copy(this.rotation)
-
-    const material = new THREE.MeshPhongMaterial({
+    this.geometry = new THREE.PlaneGeometry(this.screenSize.w, this.screenSize.h)
+    this.material = new THREE.MeshPhongMaterial({
       opacity: 0.2,
       color: new THREE.Color('black'),
       blending: THREE.NoBlending,
       side: THREE.DoubleSide
     })
+    this.mesh = new THREE.Mesh(this.geometry, this.material)
 
-    const geometry = new THREE.PlaneGeometry(this.screenSize.width, this.screenSize.height)
-    const mesh = new THREE.Mesh(geometry, material)
-    mesh.position.copy(this.position)
-    mesh.scale.copy(this.scale)
-    mesh.castShadow = false
-    mesh.receiveShadow = true
-    mesh.rotation.copy(this.rotation)
+    this.animationZoom = new AnimationZoom(this.mesh, this.CSS3DObject, this.position)
 
-    this.scene.add(mesh)
-    this.cssScene.add(object)
+    this.init()
+  }
+
+  init () {
+    this.CSS3DObject.position.copy(this.position)
+    this.CSS3DObject.scale.copy(this.scale)
+    this.CSS3DObject.rotation.copy(this.rotation)
+    this.CSS3DObject.element.style.pointerEvents = 'none'
+
+    this.mesh.position.copy(this.position)
+    this.mesh.scale.copy(this.scale)
+    this.mesh.castShadow = false
+    this.mesh.receiveShadow = true
+    this.mesh.rotation.copy(this.rotation)
+
+    this.cssScene.add(this.CSS3DObject)
+    this.scene.add(this.mesh)
   }
 
   createCSS3DObject () {
@@ -58,11 +59,12 @@ export default class ScreenMonitor {
     wrapper.style.width = this.iframeSize.w + 'px'
     wrapper.style.height = this.iframeSize.h + 'px'
 
-    const object = new CSS3DObject(wrapper)
-    return object
+    return new CSS3DObject(wrapper)
   }
 
   render () {
-    this.cssRenderer.render(this.cssScene, this.camera)
+    this.animationZoom.animate(this.camera)
   }
 }
+
+export default ScreenMonitor
