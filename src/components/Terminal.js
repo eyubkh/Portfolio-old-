@@ -1,5 +1,4 @@
 import '../styles/loading.css'
-import image from '../public/win3-1.png'
 
 const loadingData = {
   firstPhase: [
@@ -52,8 +51,7 @@ const loadingData = {
     <p>C:\\>rem C:\\WINDOWS/\\\\WIN</p>
     <p>C:\\>LW /L:1,46576 C:\\DOS\\MSCDEX.EXE /D:MESCD001 /V /M:15</p>
     </div>`
-  ],
-  image: `<img src="${image}" alt="Windows 3.1 Logo Type" />`
+  ]
 }
 
 class Terminal {
