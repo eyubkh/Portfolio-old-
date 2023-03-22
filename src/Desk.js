@@ -3,7 +3,7 @@ import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer'
 import Monitor from './components/Monitor'
 import Environment from './components/Environment'
 import Lighting from './components/Lighting'
-import orbitalContrals from './utils/orbit'
+// import orbitalContrals from './utils/orbit'
 
 class Desk {
   scene = new THREE.Scene()
@@ -24,7 +24,7 @@ class Desk {
     this.environment = new Environment(this.scene)
     this.lighting = new Lighting(this.scene)
 
-    this.controls = orbitalContrals(this.camera, this.cssRenderer.domElement)
+    // this.controls = orbitalContrals(this.camera, this.cssRenderer.domElement)
 
     this.init()
   }
@@ -39,7 +39,7 @@ class Desk {
     this.camera.position.set(0, 150, 150)
     this.camera.lookAt(0, 0, 0)
 
-    this.controls.update()
+    // this.controls.update()
     this.render()
   }
 
@@ -71,7 +71,7 @@ class Desk {
 
     this.monitor.render()
 
-    this.controls.update()
+    // this.controls.update()
 
     window.requestAnimationFrame(this.render.bind(this))
   }
