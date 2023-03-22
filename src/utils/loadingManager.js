@@ -2,10 +2,11 @@ import { LoadingManager } from 'three'
 
 export const manager = new LoadingManager()
 
-export function onLoad (callback) {
-  manager.onLoad = callback
-}
-
-export function onError (callback) {
-  manager.onError = callback
-}
+export const promise = new Promise((resolve, reject) => {
+  manager.onLoad = () => {
+    resolve()
+  }
+  manager.onError = (error) => {
+    reject(error)
+  }
+})
