@@ -16,6 +16,9 @@ class App {
   onLoad () {
     this.terminal.isLoadDone = true
     this.terminal.update()
+    setTimeout(() => {
+      this.desk.start()
+    }, 4000)
   }
 
   onError () {
