@@ -33,7 +33,7 @@ class AnimationZoom {
     if (this.intersects) {
       camera.position.lerp(new THREE.Vector3(0, 19, 17), 0.05)
     } else {
-      camera.position.lerp(new THREE.Vector3(0, 60, 110), 0.025)
+      camera.position.lerp(new THREE.Vector3(0, 60, 80), 0.025)
     }
   }
 }
