@@ -5,10 +5,10 @@ class AnimationZoom {
   pointer = new THREE.Vector2()
   intersects = false
 
-  constructor (mesh, object, position) {
+  constructor (mesh) {
     this.mesh = mesh
-    this.object = object
-    this.position = position
+    this.screenElement = document.getElementsByTagName('iframe')
+    this.position = new THREE.Vector3(0, 0, 0)
 
     window.addEventListener('mousemove', event => this.onHover(event))
   }
@@ -17,9 +17,9 @@ class AnimationZoom {
     this.intersects = !!this.raycaster.intersectObject(this.mesh)[0]
 
     if (this.intersects) {
-      this.object.element.style.pointerEvents = 'initial'
+      this.screenElement[0].style.pointerEvents = 'initial'
     } else {
-      this.object.element.style.pointerEvents = 'none'
+      this.screenElement[0].style.pointerEvents = 'none'
     }
 
     this.pointer.x = (event.clientX / window.innerWidth) * 2 - 1
@@ -27,13 +27,13 @@ class AnimationZoom {
   }
 
   animate (camera) {
-    camera.lookAt(this.position)
+    camera.lookAt(this.mesh.position)
     this.raycaster.setFromCamera(this.pointer, camera)
 
     if (this.intersects) {
-      camera.position.lerp(new THREE.Vector3(0, 1240, 950), 0.05)
+      camera.position.lerp(new THREE.Vector3(0, 19, 17), 0.05)
     } else {
-      camera.position.lerp(new THREE.Vector3(0, 5040, 5000), 0.045)
+      camera.position.lerp(new THREE.Vector3(0, 60, 110), 0.025)
     }
   }
 }

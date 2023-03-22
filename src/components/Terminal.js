@@ -117,7 +117,7 @@ class Terminal {
     }, time)
   }
 
-  async _app () {
+  async app () {
     if (this.isLoadDone && this.isFirstPhaseDone) {
       this.isLoadDone = false
       await this.secondPhase()
@@ -131,7 +131,7 @@ class Terminal {
   }
 
   async update () {
-    this.loadingElement.innerHTML = await this._app()
+    this.loadingElement.innerHTML = await this.app()
     window.scrollTo(0, this.loadingElement.scrollHeight)
   }
 }

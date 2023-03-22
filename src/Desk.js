@@ -6,12 +6,17 @@ import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer'
 
 class Desk {
   scene = new THREE.Scene()
-  renderer = new THREE.WebGLRenderer()
+  renderer = new THREE.WebGLRenderer({
+    antialias: true
+  })
+
+  webglElement = window.document.getElementById('webgl')
+
   cssScene = new THREE.Scene()
   cssRenderer = new CSS3DRenderer()
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 30000)
-  webglElement = window.document.getElementById('webgl')
   cssElement = window.document.querySelector('#css')
+
+  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 30000)
 
   constructor () {
     this.monitor = new Monitor(this.scene, this.camera, this.cssScene)
@@ -28,10 +33,14 @@ class Desk {
     this.renderer.setClearColor(0xf1f1f1, 1)
     this.renderer.outputEncoding = THREE.sRGBEncoding
 
-    this.camera.position.set(0, 5040, 5000)
+    this.camera.position.set(0, 150, 150)
     this.camera.lookAt(0, 0, 0)
 
     this.render()
+  }
+
+  start () {
+    this.camera.position.set(0, 300, 110)
   }
 
   resizeRenderer () {
@@ -42,16 +51,16 @@ class Desk {
     if (needResize) {
       this.renderer.setSize(width, height, false)
       this.cssRenderer.setSize(width, height, false)
+
+      const canvas = this.renderer.domElement
+      this.camera.aspect = canvas.clientWidth / canvas.clientHeight
+      this.camera.updateProjectionMatrix()
     }
     return needResize
   }
 
   render () {
-    if (this.resizeRenderer()) {
-      const canvas = this.renderer.domElement
-      this.camera.aspect = canvas.clientWidth / canvas.clientHeight
-      this.camera.updateProjectionMatrix()
-    }
+    this.resizeRenderer()
 
     this.renderer.render(this.scene, this.camera)
     this.cssRenderer.render(this.cssScene, this.camera)
