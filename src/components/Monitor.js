@@ -8,7 +8,7 @@ class Monitor {
     this.scene = scene
     this.camera = camera
     this.cssScene = cssScene
-    this.position = new THREE.Vector3(0, 1240, -350)
+    this.position = new THREE.Vector3(0, 19, -5)
     this.screenMonitor = new ScreenMonitor(this.scene, this.camera, this.position, this.cssScene)
 
     this.init()

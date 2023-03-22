@@ -17,10 +17,10 @@ class Lighting {
   }
 
   init () {
-    this.topLight.position.set(0, 4000, 0)
+    this.topLight.position.set(0, 40, 0)
     this.scene.add(this.topLight)
 
-    this.frontLight.position.set(0, 4000, 2000)
+    this.frontLight.position.set(0, 40, 20)
     this.frontLight.rotateX(1)
     this.scene.add(this.frontLight)
 

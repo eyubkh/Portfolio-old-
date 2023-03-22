@@ -6,7 +6,7 @@ class ModelLoader {
   constructor (model) {
     this.model = model
     this.loader = new GLTFLoader(manager)
-    this.scale = 700
+    this.scale = 10
     this.position = new THREE.Vector3(0, 0, 0)
     this.rotation = new THREE.Euler(0, -Math.PI / 2, 0)
   }

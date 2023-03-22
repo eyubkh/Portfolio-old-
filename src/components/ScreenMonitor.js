@@ -15,8 +15,8 @@ class ScreenMonitor {
     this.camera = camera
     this.cssScene = cssScene
 
-    this.position = new THREE.Vector3(-50, 0, 470).add(monitorPosition)
-    this.scale = new THREE.Vector3(1, 1, 1)
+    this.position = new THREE.Vector3(0, 0, 7).add(monitorPosition)
+    this.scale = new THREE.Vector3(0.015, 0.015, 0.015)
     this.rotation = new THREE.Euler(-0.05, 0, 0)
 
     this.CSS3DObject = this.createCSS3DObject()
@@ -30,7 +30,7 @@ class ScreenMonitor {
     })
     this.mesh = new THREE.Mesh(this.geometry, this.material)
 
-    this.animationZoom = new AnimationZoom(this.mesh, this.CSS3DObject, this.position)
+    this.animationZoom = new AnimationZoom(this.mesh)
 
     this.init()
   }
@@ -53,7 +53,7 @@ class ScreenMonitor {
 
   createCSS3DObject () {
     const wrapper = document.createElement('iframe')
-    wrapper.src = 'https://portfolio-environment.vercel.app/os'
+    wrapper.src = 'https://portfolio-environment.vercel.app'
     wrapper.style.backgroundColor = 'black'
     wrapper.style.padding = this.iframePadding + 'px'
     wrapper.style.width = this.iframeSize.w + 'px'
