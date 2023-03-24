@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer'
-import AnimationZoom from '../utils/animationZoom'
+import { animationZoom } from '../utils/animationZoom'
 
 class ScreenMonitor {
   screenSize = { w: 1280, h: 1052.44 }
@@ -32,8 +32,6 @@ class ScreenMonitor {
     })
     this.mesh = new THREE.Mesh(this.geometry, this.material)
 
-    this.animationZoom = new AnimationZoom(this.mesh)
-
     this.init()
   }
 
@@ -49,6 +47,10 @@ class ScreenMonitor {
     this.mesh.receiveShadow = true
     this.mesh.rotation.copy(this.rotation)
 
+    animationZoom
+      .defineMesh(this.mesh)
+      .init()
+
     this.cssScene.add(this.CSS3DObject)
     this.scene.add(this.mesh)
   }
@@ -62,10 +64,6 @@ class ScreenMonitor {
     wrapper.style.height = this.iframeSize.h + 'px'
 
     return new CSS3DObject(wrapper)
-  }
-
-  render () {
-    this.animationZoom.animate(this.camera)
   }
 }
 

@@ -20,10 +20,6 @@ class Monitor {
     monitorModel.setPosition(this.position)
     monitorModel.render(this.scene)
   }
-
-  render () {
-    this.screenMonitor.render()
-  }
 }
 
 export default Monitor
