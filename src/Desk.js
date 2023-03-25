@@ -1,9 +1,13 @@
+import './styles/webgl.css'
 import * as THREE from 'three'
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer'
 import Monitor from './components/Monitor'
 import Environment from './components/Environment'
 import Lighting from './components/Lighting'
-// import orbitalContrals from './utils/orbit'
+import orbitalContrals from './utils/orbit'
+import { loadingManagerPromise } from './utils/loadingManager'
+import { animationZoom } from './utils/animationZoom'
+import { globalState } from './utils/globalState'
 
 class Desk {
   scene = new THREE.Scene()
@@ -24,27 +28,27 @@ class Desk {
     this.environment = new Environment(this.scene)
     this.lighting = new Lighting(this.scene)
 
-    // this.controls = orbitalContrals(this.camera, this.cssRenderer.domElement)
+    this.controls = orbitalContrals(this.camera, document.getElementById('ui'))
 
     this.init()
   }
 
-  init () {
+  async init () {
     this.webglElement.appendChild(this.renderer.domElement)
     this.cssElement.appendChild(this.cssRenderer.domElement)
 
     this.renderer.setClearColor(0xf1f1f1, 1)
     this.renderer.outputEncoding = THREE.sRGBEncoding
 
-    this.camera.position.set(0, 150, 150)
     this.camera.lookAt(0, 0, 0)
 
-    // this.controls.update()
-    this.render()
-  }
-
-  start () {
-    this.camera.position.set(0, 300, 110)
+    await loadingManagerPromise
+      .then(() => {
+        this.render()
+        setTimeout(() => {
+          this.camera.position.set(0, 500, 800)
+        }, 4000)
+      })
   }
 
   resizeRenderer () {
@@ -69,9 +73,12 @@ class Desk {
     this.renderer.render(this.scene, this.camera)
     this.cssRenderer.render(this.cssScene, this.camera)
 
-    this.monitor.render()
-
-    // this.controls.update()
+    this.controls.enabled = globalState.isOrbitalContorl
+    if (globalState.isOrbitalContorl) {
+      this.controls.update()
+    } else {
+      animationZoom.update(this.camera)
+    }
 
     window.requestAnimationFrame(this.render.bind(this))
   }
