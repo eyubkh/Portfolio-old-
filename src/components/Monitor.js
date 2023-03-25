@@ -10,7 +10,8 @@ class Monitor {
     this.camera = camera
     this.cssScene = cssScene
     this.position = new THREE.Vector3(data.monitor.x, data.monitor.y, data.monitor.z)
-    this.screenMonitor = new ScreenMonitor(this.scene, this.cssScene, this.camera, this.position)
+    this.rotation = new THREE.Euler(0, -Math.PI / 2 + 0.025, 0)
+    this.screenMonitor = new ScreenMonitor(this.scene, this.cssScene, this.camera, this.position, this.rotation)
 
     this.init()
   }
@@ -18,7 +19,8 @@ class Monitor {
   init () {
     const monitorModel = new ModelLoader(model, this.position)
     monitorModel.setPosition(this.position)
-    monitorModel.render(this.scene)
+    monitorModel.setRotation(this.rotation)
+    monitorModel.addTo(this.scene)
   }
 }
 
