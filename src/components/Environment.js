@@ -10,7 +10,7 @@ class Environment {
 
   init () {
     const environmentModel = new ModelLoader(model)
-    environmentModel.render(this.scene)
+    environmentModel.addTo(this.scene)
   }
 }
 

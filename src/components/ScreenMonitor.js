@@ -4,22 +4,21 @@ import { animationZoom } from '../utils/animationZoom'
 
 class ScreenMonitor {
   screenSize = { w: 1280, h: 1052.44 }
+  iframeScale = 0.0142
   iframePadding = 32
   iframeSize = {
     w: this.screenSize.w - this.iframePadding,
     h: this.screenSize.h - this.iframePadding
   }
 
-  iframeScale = 0.0142
-
   constructor (scene, cssScene, camera, monitorPosition) {
     this.scene = scene
     this.camera = camera
     this.cssScene = cssScene
 
-    this.position = new THREE.Vector3(-0.65, 0.2, 6.5).add(monitorPosition)
+    this.position = new THREE.Vector3(-0.5, 0.2, 6.5).add(monitorPosition)
     this.scale = new THREE.Vector3(this.iframeScale, this.iframeScale, this.iframeScale)
-    this.rotation = new THREE.Euler(-0.05, 0, 0)
+    this.rotation = new THREE.Euler(-0.05, 0.025, 0)
 
     this.CSS3DObject = this.createCSS3DObject()
 
