@@ -19,7 +19,7 @@ class AnimationZoom {
 
   init () {
     if (this.mesh) {
-      document.querySelector('#css').addEventListener('mousemove', event => this.onHover(event))
+      document.querySelector('#ui').addEventListener('mousemove', event => this.onHover(event))
     } else {
       console.error('this.mesh is undefined')
     }
@@ -41,9 +41,8 @@ class AnimationZoom {
   update (camera) {
     camera.lookAt(this.mesh.position)
     this.raycaster.setFromCamera(this.pointer, camera)
-
     if (this.intersects) {
-      camera.position.lerp(new THREE.Vector3(0, 19, 12), 0.05)
+      camera.position.lerp(new THREE.Vector3(0, 19, 14), 0.05)
     } else {
       camera.position.lerp(new THREE.Vector3(0, 60, 80), 0.025)
     }
