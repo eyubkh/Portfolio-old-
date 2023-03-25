@@ -1,12 +1,12 @@
 import { LoadingManager } from 'three'
 
-export const manager = new LoadingManager()
+export const loadingManager = new LoadingManager()
 
-export const promise = new Promise((resolve, reject) => {
-  manager.onLoad = () => {
+export const loadingManagerPromise = new Promise((resolve, reject) => {
+  loadingManager.onLoad = () => {
     resolve()
   }
-  manager.onError = (error) => {
+  loadingManager.onError = (error) => {
     reject(error)
   }
 })
