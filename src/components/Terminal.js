@@ -1,27 +1,16 @@
 import '../styles/loading.css'
 import loadingData from '../utils/terminalData'
-import { promise } from '../utils/loadingManager'
+import { loadingManagerPromise } from '../utils/loadingManager'
+import { isSmallDeviceOrTouchScreen } from '../utils/isSmallDeviceOrTouchScreen'
 
 class Terminal {
   loadingElement = document.getElementById('loading')
+  isError = false
 
   terminalText = ''
-  cursor = '<div class="cursor"></div>'
-
-  isFirstPhaseDone = false
 
   constructor () {
     this.init()
-  }
-
-  addTerminalText (string, time) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        this.terminalText += string
-        this.update()
-        resolve()
-      }, time)
-    })
   }
 
   async init () {
@@ -30,25 +19,45 @@ class Terminal {
     await this.addTerminalText(loadingData.text[2], 400)
     await this.addTerminalText(loadingData.text[3], 300)
 
-    await promise
+    await loadingManagerPromise
       .then(() => {
-        this.handlerLoadState(loadingData.loadState.done)
+        if (isSmallDeviceOrTouchScreen()) {
+          throw new Error()
+        } else {
+          this.handlerLoadState(loadingData.success.value)
+        }
       })
-      .catch(() => {
-        this.handlerLoadState(loadingData.loadState.error)
+      .catch(async () => {
+        this.isError = true
+        this.handlerLoadState(loadingData.error.value)
+
+        await this.clearTerminal(1000)
+        await this.addTerminalText(loadingData.error.message, 500)
       })
 
-    await this.addTerminalText(loadingData.text[4], 1000)
-    await this.addTerminalText(loadingData.text[5], 300)
-    await this.addTerminalText(loadingData.text[6], 400)
-    await this.addTerminalText(loadingData.text[7], 300)
-    await this.clearTerminal(300)
-    await this.removeTerminal(2000)
+    if (this.isError === false) {
+      await this.addTerminalText(loadingData.text[4], 1000)
+      await this.addTerminalText(loadingData.text[5], 300)
+      await this.addTerminalText(loadingData.text[6], 400)
+      await this.addTerminalText(loadingData.text[7], 300)
+      await this.clearTerminal(300)
+      await this.removeTerminal(2000)
+    }
   }
 
   handlerLoadState (string) {
-    this.terminalText = this.terminalText.replace(loadingData.loadState.value, string)
-    this.update()
+    this.terminalText = this.terminalText.replace(loadingData.text[3], string)
+    this.appUpdate()
+  }
+
+  addTerminalText (string, time) {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        this.terminalText += string
+        this.appUpdate()
+        resolve()
+      }, time)
+    })
   }
 
   async clearTerminal (time) {
@@ -56,7 +65,7 @@ class Terminal {
       setTimeout(() => {
         console.log('clear console')
         this.terminalText = ''
-        this.update()
+        this.appUpdate()
         resolve()
       }, time)
     })
@@ -72,10 +81,10 @@ class Terminal {
   }
 
   async app () {
-    return this.terminalText + this.cursor
+    return this.terminalText + '<div class="cursor"></div>'
   }
 
-  async update () {
+  async appUpdate () {
     this.loadingElement.innerHTML = await this.app()
     window.scrollTo(0, this.loadingElement.scrollHeight)
   }
