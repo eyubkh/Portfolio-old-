@@ -6,8 +6,10 @@ function orbitControl (camera, domElement) {
   controls.minDistance = 50
   controls.maxPolarAngle = Math.PI / 2.5
   controls.autoRotate = true
-  controls.minAzimuthAngle = Math.Pi / 2
+  controls.enablePan = false
   controls.autoRotateSpeed = 0.3
+  controls.minAzimuthAngle = -Math.PI / 3.3
+  controls.maxAzimuthAngle = Math.PI / 3.3
 
   return controls
 }
