@@ -3,13 +3,31 @@ import { CSS3DObject } from 'three/examples/jsm/renderers/CSS3DRenderer'
 import { animationZoom } from '../utils/animationZoom'
 
 class ScreenMonitor {
-  screenSize = { w: 1280, h: 1052.44 }
-  iframeScale = 0.0142
-  iframePadding = 32
-  iframeSize = {
+  readonly screenSize = { w: 1280, h: 1052.44 }
+  readonly iframeScale = 0.0142
+  readonly iframePadding = 32
+  readonly iframeSize = {
     w: this.screenSize.w - this.iframePadding,
     h: this.screenSize.h - this.iframePadding
   }
+
+  scene: THREE.Scene
+  camera: THREE.Camera
+  cssScene: THREE.Scene
+  position: THREE.Vector3
+  CSS3DObject: CSS3DObject
+  mesh: THREE.Mesh
+  
+  scale = new THREE.Vector3(this.iframeScale, this.iframeScale, this.iframeScale)
+  rotation = new THREE.Euler(-0.05, 0.025, 0)
+  geometry = new THREE.PlaneGeometry(this.screenSize.w, this.screenSize.h)
+  material = new THREE.MeshPhongMaterial({
+    opacity: 0.2,
+    color: new THREE.Color('black'),
+    blending: THREE.NoBlending,
+    side: THREE.DoubleSide
+  })
+
 
   constructor (scene, cssScene, camera, monitorPosition) {
     this.scene = scene
@@ -17,18 +35,9 @@ class ScreenMonitor {
     this.cssScene = cssScene
 
     this.position = new THREE.Vector3(-0.5, 0.2, 6.5).add(monitorPosition)
-    this.scale = new THREE.Vector3(this.iframeScale, this.iframeScale, this.iframeScale)
-    this.rotation = new THREE.Euler(-0.05, 0.025, 0)
 
     this.CSS3DObject = this.createCSS3DObject()
 
-    this.geometry = new THREE.PlaneGeometry(this.screenSize.w, this.screenSize.h)
-    this.material = new THREE.MeshPhongMaterial({
-      opacity: 0.2,
-      color: new THREE.Color('black'),
-      blending: THREE.NoBlending,
-      side: THREE.DoubleSide
-    })
     this.mesh = new THREE.Mesh(this.geometry, this.material)
 
     this.init()

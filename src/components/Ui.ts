@@ -1,8 +1,9 @@
 import '../styles/ui.css'
 import { globalState } from '../utils/globalState'
 class Ui {
+  mainElement = document.getElementById('ui')
+  
   constructor () {
-    this.mainElement = document.getElementById('ui')
     this.init()
   }
 

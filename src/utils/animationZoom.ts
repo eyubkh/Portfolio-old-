@@ -4,12 +4,9 @@ class AnimationZoom {
   raycaster = new THREE.Raycaster()
   pointer = new THREE.Vector2()
   intersects = false
-
-  constructor () {
-    this.mesh = undefined
-    this.screenElement = document.getElementsByTagName('iframe')
-    this.position = new THREE.Vector3(0, 0, 0)
-  }
+  mesh = undefined
+  screenElement = document.getElementsByTagName('iframe')
+  position = new THREE.Vector3(0, 0, 0)
 
   defineMesh (mesh) {
     this.mesh = mesh
@@ -19,7 +16,7 @@ class AnimationZoom {
 
   init () {
     if (this.mesh) {
-      document.querySelector('#ui').addEventListener('mousemove', event => this.onHover(event))
+      document.querySelector('#css').addEventListener('mousemove', event => this.onHover(event))
     } else {
       console.error('this.mesh is undefined')
     }

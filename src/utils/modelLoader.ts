@@ -3,15 +3,18 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import { loadingManager } from './loadingManager'
 
 class ModelLoader {
-  constructor (model) {
-    this.model = model
+  scale = 10
+  position = new THREE.Vector3(0, 0, 0)
+  rotation = new THREE.Euler(0, -Math.PI / 2, 0)
+
+  model: any
+  loader: GLTFLoader
+
+  constructor () {
     this.loader = new GLTFLoader(loadingManager)
-    this.scale = 10
-    this.position = new THREE.Vector3(0, 0, 0)
-    this.rotation = new THREE.Euler(0, -Math.PI / 2, 0)
   }
 
-  addTo (scene) {
+  addToScene (scene: THREE.Scene) {
     this.loader.load(this.model, (gltf) => {
       const object = gltf.scene
       object.rotation.copy(this.rotation)
@@ -21,16 +24,29 @@ class ModelLoader {
     })
   }
 
-  setPosition (position) {
+  setModel(model) {
+    this.model = model
+  }
+
+  setPosition (position: THREE.Vector3) {
     this.position = position
   }
 
-  setRotation (rotation) {
+  setRotation (rotation: THREE.Euler) {
     this.rotation = rotation
   }
 
   setScale (scale) {
     this.scale = scale
+  }
+
+  createModel(model, scene: THREE.Scene) {
+    this.setModel(model)
+    this.addToScene(scene)
+    this.setPosition(this.position)
+    this.setRotation(this.rotation)
+
+    this.addToScene(scene)
   }
 }
 

@@ -55,7 +55,7 @@ class Terminal {
       setTimeout(() => {
         this.terminalText += string
         this.appUpdate()
-        resolve()
+        resolve('')
       }, time)
     })
   }
@@ -66,7 +66,7 @@ class Terminal {
         console.log('clear console')
         this.terminalText = ''
         this.appUpdate()
-        resolve()
+        resolve('')
       }, time)
     })
   }
@@ -75,7 +75,7 @@ class Terminal {
     await new Promise((resolve) => {
       setTimeout(() => {
         this.loadingElement.style.display = 'none'
-        resolve()
+        resolve('')
       }, time)
     })
   }

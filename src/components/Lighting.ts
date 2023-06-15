@@ -6,6 +6,11 @@ class Lighting {
   lightColor = 0xffffff
   ambientColor = 0xffffff
 
+  scene: THREE.Scene
+  topLight: THREE.DirectionalLight
+  frontLight: THREE.DirectionalLight
+  ambientLight: THREE.AmbientLight
+
   constructor (scene) {
     this.scene = scene
 
