@@ -9,7 +9,7 @@ class Monitor extends ModelLoader {
   monitorRotation = new THREE.Euler(0, -Math.PI / 2 + 0.025, 0)
 
   scene: THREE.Scene
-  camera: THREE.Camera
+  camera: THREE.PerspectiveCamera
   cssScene: THREE.Scene
   screenMonitor: ScreenMonitor
 

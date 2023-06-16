@@ -1,7 +1,8 @@
-import '../styles/loading.css'
+import '../styles/terminal.css'
 import loadingData from '../utils/terminalData'
 import { loadingManagerPromise } from '../utils/loadingManager'
 import { isSmallDeviceOrTouchScreen } from '../utils/isSmallDeviceOrTouchScreen'
+import { globalState } from '../utils/globalState'
 
 class Terminal {
   loadingElement = document.getElementById('loading')
@@ -41,16 +42,16 @@ class Terminal {
       await this.addTerminalText(loadingData.text[6], 400)
       await this.addTerminalText(loadingData.text[7], 300)
       await this.clearTerminal(300)
-      await this.removeTerminal(2000)
+      globalState.terminalLoaded = true
     }
   }
 
-  handlerLoadState (string) {
+  handlerLoadState (string: string) {
     this.terminalText = this.terminalText.replace(loadingData.text[3], string)
     this.appUpdate()
   }
 
-  addTerminalText (string, time) {
+  addTerminalText (string: string, time: number) {
     return new Promise((resolve) => {
       setTimeout(() => {
         this.terminalText += string
@@ -60,7 +61,7 @@ class Terminal {
     })
   }
 
-  async clearTerminal (time) {
+  async clearTerminal (time: number) {
     await new Promise((resolve) => {
       setTimeout(() => {
         console.log('clear console')
@@ -71,11 +72,14 @@ class Terminal {
     })
   }
 
-  async removeTerminal (time) {
-    await new Promise((resolve) => {
+  async removeTerminal (time: number) {
+    await new Promise((resolve, reject) => {
       setTimeout(() => {
-        this.loadingElement.style.display = 'none'
-        resolve('')
+        if(this.loadingElement){
+          this.loadingElement.style.display = 'none'
+          resolve('')
+        }
+        reject()
       }, time)
     })
   }
@@ -85,8 +89,11 @@ class Terminal {
   }
 
   async appUpdate () {
-    this.loadingElement.innerHTML = await this.app()
-    window.scrollTo(0, this.loadingElement.scrollHeight)
+    if(this.loadingElement) {
+      this.loadingElement.innerHTML = await this.app()
+      window.scrollTo(0, this.loadingElement.scrollHeight)
+    }
+    
   }
 }
 

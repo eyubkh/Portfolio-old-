@@ -1,3 +1,3 @@
 export const globalState = {
-  isOrbitalContorl: false
+  isOrbitalContorl: false,
 }

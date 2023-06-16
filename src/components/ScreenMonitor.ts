@@ -29,7 +29,7 @@ class ScreenMonitor {
   })
 
 
-  constructor (scene, cssScene, camera, monitorPosition) {
+  constructor (scene: THREE.Scene, cssScene: THREE.Scene, camera: THREE.PerspectiveCamera, monitorPosition: THREE.Vector3) {
     this.scene = scene
     this.camera = camera
     this.cssScene = cssScene

@@ -8,6 +8,7 @@ import orbitalContrals from './utils/orbitalControls'
 import { loadingManagerPromise } from './utils/loadingManager'
 import { animationZoom } from './utils/animationZoom'
 import { globalState } from './utils/globalState'
+import resizeRenderer from './utils/resizeRenderer'
 
 class Desk {
   scene = new THREE.Scene()
@@ -22,11 +23,12 @@ class Desk {
   cssElement = window.document.querySelector('#css')
 
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 30000)
+  controls: any
 
   constructor () {
-    this.monitor = new Monitor(this.scene, this.cssScene, this.camera)
-    this.environment = new Environment(this.scene)
-    this.lighting = new Lighting(this.scene)
+    new Monitor(this.scene, this.cssScene, this.camera)
+    new Environment(this.scene)
+    new Lighting(this.scene)
 
     this.controls = orbitalContrals(this.camera, document.getElementById('ui'))
 
@@ -34,41 +36,25 @@ class Desk {
   }
 
   async init () {
-    this.webglElement.appendChild(this.renderer.domElement)
-    this.cssElement.appendChild(this.cssRenderer.domElement)
+    if(this.webglElement && this.cssElement ) {
+      this.webglElement.appendChild(this.renderer.domElement)
+      this.cssElement.appendChild(this.cssRenderer.domElement)
+    }
 
     this.renderer.setClearColor(0xf1f1f1, 1)
     this.renderer.outputEncoding = THREE.sRGBEncoding
 
     this.camera.lookAt(0, 0, 0)
+    this.camera.position.set(0, 100, 200)
 
     await loadingManagerPromise
       .then(() => {
         this.render()
-        setTimeout(() => {
-          this.camera.position.set(0, 500, 800)
-        }, 4000)
       })
   }
 
-  resizeRenderer () {
-    const canvas = this.renderer.domElement
-    const width = canvas.clientWidth
-    const height = canvas.clientHeight
-    const needResize = canvas.width !== width || canvas.height !== height
-    if (needResize) {
-      this.renderer.setSize(width, height, false)
-      this.cssRenderer.setSize(width, height, false)
-
-      const canvas = this.renderer.domElement
-      this.camera.aspect = canvas.clientWidth / canvas.clientHeight
-      this.camera.updateProjectionMatrix()
-    }
-    return needResize
-  }
-
   render () {
-    this.resizeRenderer()
+    resizeRenderer(this.camera, this.renderer, this.cssRenderer)
 
     this.renderer.render(this.scene, this.camera)
     this.cssRenderer.render(this.cssScene, this.camera)

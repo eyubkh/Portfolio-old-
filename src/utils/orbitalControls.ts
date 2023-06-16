@@ -1,6 +1,6 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
-function orbitControl (camera, domElement) {
+function orbitControl (camera: THREE.PerspectiveCamera, domElement: any) {
   const controls = new OrbitControls(camera, domElement)
   controls.maxDistance = 150
   controls.minDistance = 50

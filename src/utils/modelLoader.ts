@@ -24,7 +24,7 @@ class ModelLoader {
     })
   }
 
-  setModel(model) {
+  setModel(model: any) {
     this.model = model
   }
 
@@ -36,11 +36,11 @@ class ModelLoader {
     this.rotation = rotation
   }
 
-  setScale (scale) {
+  setScale (scale: number) {
     this.scale = scale
   }
 
-  createModel(model, scene: THREE.Scene) {
+  createModel(model: any, scene: THREE.Scene) {
     this.setModel(model)
     this.addToScene(scene)
     this.setPosition(this.position)
