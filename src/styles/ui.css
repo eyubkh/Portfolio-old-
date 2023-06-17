@@ -6,3 +6,54 @@
   left: 0;
   z-index: 1;
 }
+
+#ui-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  height: 100vh;
+  width: 100vw;
+  padding: 40px;
+
+}
+
+#ui-content #logo svg {
+  width: 50px;
+}
+#ui-content #name {
+  text-align: right;
+  user-select: none;
+}
+#ui-content #controls {
+  margin-top: auto;
+}
+#ui-content #other {
+  margin-top: auto;
+  justify-self: end;
+}
+
+
+
+@keyframes hide {
+  0% {
+    opacity: 1;
+    left: 0
+  }
+  90% {
+    left: 0
+  }
+  100% {
+    left: -100vw;
+    opacity: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+

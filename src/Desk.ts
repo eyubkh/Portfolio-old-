@@ -7,8 +7,12 @@ import Lighting from './components/Lighting'
 import orbitalContrals from './utils/orbitalControls'
 import { loadingManagerPromise } from './utils/loadingManager'
 import { animationZoom } from './utils/animationZoom'
-import { globalState } from './utils/globalState'
 import resizeRenderer from './utils/resizeRenderer'
+
+export const state = {
+  isOrbitalContorl: false,
+}
+
 
 class Desk {
   scene = new THREE.Scene()
@@ -24,9 +28,10 @@ class Desk {
 
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 30000)
   controls: any
+  monitor: Monitor
 
   constructor () {
-    new Monitor(this.scene, this.cssScene, this.camera)
+    this.monitor = new Monitor(this.scene, this.cssScene, this.camera)
     new Environment(this.scene)
     new Lighting(this.scene)
 
@@ -59,8 +64,9 @@ class Desk {
     this.renderer.render(this.scene, this.camera)
     this.cssRenderer.render(this.cssScene, this.camera)
 
-    this.controls.enabled = globalState.isOrbitalContorl
-    if (globalState.isOrbitalContorl) {
+    this.controls.enabled = state.isOrbitalContorl
+    if (state.isOrbitalContorl) {
+      this.controls.target.set(this.monitor.position.x - 0.5, this.monitor.position.y + 0.2, this.monitor.position.z + 6.5)
       this.controls.update()
     } else {
       animationZoom.update(this.camera)
