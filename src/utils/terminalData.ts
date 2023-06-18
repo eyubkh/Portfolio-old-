@@ -16,7 +16,7 @@ export default {
         <p>Copyright Micorsoft Corporation 1986, 1992</p>
         <p>Copyright Compag Computer Corporation 1992</p>
       </div>`,
-      `<div>
+    `<div>
         <p>CD-ROM Device Drive Verision 4.12</p>
         <p>Copyright (C) Creative Techology Ltd, and</p>
         <p>Copyright (C) Matsuhita-Kotobuki Electroics Industires, Ltd.</p>
@@ -27,7 +27,7 @@ export default {
         <p>1 CD-ROM drive(s) connected.</p>
         <p>CD-ROM device driver installed</p>
       </div>`,
-      `
+    `
     <div>
     <p>Mouse Drive - Release 6.23                  Standard Version</p>
     <p>Copyright (C) 1984, 1993 Logitech Inc. All right reserved.</p>
@@ -40,13 +40,13 @@ export default {
     `<div>
     <p>C:\\>rem C:\\WINDOWS/\\\\WIN</p>
     <p>C:\\>LW /L:1,46576 C:\\DOS\\MSCDEX.EXE /D:MESCD001 /V /M:15</p>
-    </div>`
+    </div>`,
   ],
   error: {
     value: '<p>MIMEM is testing extended memory... error.</p>',
-    message: '<p>Sorry, your device/browser is not compatible...</p>'
+    message: '<p>Sorry, your device/browser is not compatible...</p>',
   },
   success: {
-    value: '<p>MIMEM is testing extended memory... done.</p>'
-  }
+    value: '<p>MIMEM is testing extended memory... done.</p>',
+  },
 }

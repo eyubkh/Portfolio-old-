@@ -1,6 +1,10 @@
 import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer'
 
-export default function resizeRenderer (camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, cssRenderer: CSS3DRenderer ) {
+export default function resizeRenderer(
+  camera: THREE.PerspectiveCamera,
+  renderer: THREE.WebGLRenderer,
+  cssRenderer: CSS3DRenderer
+) {
   const canvas = renderer.domElement
   const width = canvas.clientWidth
   const height = canvas.clientHeight

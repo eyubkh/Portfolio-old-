@@ -42,7 +42,6 @@
   list-style-type: square;
 }
 
-
 #loading img {
   margin: auto auto;
 }
@@ -51,13 +50,13 @@
   width: 15px;
   height: 3px;
   background-color: white;
-  animation: cursor infinite .8s;
+  animation: cursor infinite 0.8s;
 }
 
 @keyframes cursor {
   0% {
     opacity: 0;
-  } 
+  }
   40% {
     opacity: 0;
   }

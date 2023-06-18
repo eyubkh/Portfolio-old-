@@ -26,20 +26,16 @@
   </ul>
 </div>
 
-# Portfolio
+# Eyub's portfolio
+- Website build it with javascript and threejs, inspired by @henryjeff.
 
-Must to express my character and my pasions, also must to have balance between 3D and javascript.
-
-Expression:
-  - Self-taught
-  - Sport guy
-  - Books
-
-
-Site map:
-  - Home
-  - Skills
-  - Projects
-  - Contact
-
+## Todo-list
+[x] Fixing awaiting process to do it on the good order
+[] Fixing the screen borders
+[] Finish ui design
+[] Add sounds
+[] Work on the operative sistem details 
+[] Error handler on touch screen 
+[] Add pre-processing styles
+[] Install prettier and esbuild
 

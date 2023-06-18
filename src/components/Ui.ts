@@ -1,14 +1,10 @@
-import { state } from '../Desk'
+import { state } from '../World'
 import '../styles/ui.css'
 class Ui {
   uiElement = document.getElementById('ui')
-  
-  constructor () {
-    this.init()
-  }
 
-  init () {
-    if(this.uiElement instanceof HTMLDivElement) {
+  init() {
+    if (this.uiElement instanceof HTMLDivElement) {
       this.uiElement.innerHTML = `
         <div id="ui-content">
           <div id="logo">
@@ -37,11 +33,11 @@ class Ui {
       `
 
       const button = this.uiElement.getElementsByClassName('camera')[0]
-      if(button) button.addEventListener('click', () => {
-        state.isOrbitalContorl = !state.isOrbitalContorl
-      })
+      if (button)
+        button.addEventListener('click', () => {
+          state.isOrbitalContorl = !state.isOrbitalContorl
+        })
     }
-    
   }
 }
 

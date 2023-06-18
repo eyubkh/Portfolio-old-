@@ -11,17 +11,26 @@ class Lighting {
   frontLight: THREE.DirectionalLight
   ambientLight: THREE.AmbientLight
 
-  constructor (scene) {
+  constructor(scene: THREE.Scene) {
     this.scene = scene
 
-    this.topLight = new THREE.DirectionalLight(this.lightColor, this.lightIntesity * 0.6)
-    this.frontLight = new THREE.DirectionalLight(this.lightColor, this.lightIntesity)
-    this.ambientLight = new THREE.AmbientLight(this.ambientColor, this.ambientIntesity)
+    this.topLight = new THREE.DirectionalLight(
+      this.lightColor,
+      this.lightIntesity * 0.6
+    )
+    this.frontLight = new THREE.DirectionalLight(
+      this.lightColor,
+      this.lightIntesity
+    )
+    this.ambientLight = new THREE.AmbientLight(
+      this.ambientColor,
+      this.ambientIntesity
+    )
 
     this.init()
   }
 
-  init () {
+  init() {
     this.topLight.position.set(0, 40, 0)
     this.scene.add(this.topLight)
 

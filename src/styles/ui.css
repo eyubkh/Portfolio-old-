@@ -2,7 +2,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0; 
+  top: 0;
   left: 0;
   z-index: 1;
 }
@@ -14,7 +14,6 @@
   height: 100vh;
   width: 100vw;
   padding: 40px;
-
 }
 
 #ui-content #logo svg {
@@ -32,15 +31,13 @@
   justify-self: end;
 }
 
-
-
 @keyframes hide {
   0% {
     opacity: 1;
-    left: 0
+    left: 0;
   }
   90% {
-    left: 0
+    left: 0;
   }
   100% {
     left: -100vw;
@@ -56,4 +53,3 @@
     opacity: 1;
   }
 }
-

@@ -10,11 +10,12 @@ class ModelLoader {
   model: any
   loader: GLTFLoader
 
-  constructor () {
+  constructor(model: any) {
     this.loader = new GLTFLoader(loadingManager)
+    this.model = model
   }
 
-  addToScene (scene: THREE.Scene) {
+  addToScene(scene: THREE.Scene) {
     this.loader.load(this.model, (gltf) => {
       const object = gltf.scene
       object.rotation.copy(this.rotation)
@@ -24,24 +25,19 @@ class ModelLoader {
     })
   }
 
-  setModel(model: any) {
-    this.model = model
-  }
-
-  setPosition (position: THREE.Vector3) {
+  setPosition(position: THREE.Vector3) {
     this.position = position
   }
 
-  setRotation (rotation: THREE.Euler) {
+  setRotation(rotation: THREE.Euler) {
     this.rotation = rotation
   }
 
-  setScale (scale: number) {
+  setScale(scale: number) {
     this.scale = scale
   }
 
-  createModel(model: any, scene: THREE.Scene) {
-    this.setModel(model)
+  renderModel(scene: THREE.Scene) {
     this.addToScene(scene)
     this.setPosition(this.position)
     this.setRotation(this.rotation)
