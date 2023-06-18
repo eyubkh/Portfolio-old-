@@ -4,4 +4,7 @@ export default defineConfig({
   // easier readability in the sandbox
   clearScreen: false,
   assetsInclude: ['**/*.gltf'],
+  build: {
+    outDir: "build",
+  }
 });
