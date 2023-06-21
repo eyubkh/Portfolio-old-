@@ -1,3 +1,4 @@
+import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 
 function orbitControl(camera: THREE.PerspectiveCamera) {
@@ -8,7 +9,7 @@ function orbitControl(camera: THREE.PerspectiveCamera) {
     controls = new OrbitControls(camera, domElement)
 
     controls.maxDistance = 150
-    controls.minDistance = 50
+    controls.minDistance = 20
     controls.maxPolarAngle = Math.PI / 2.5
     controls.autoRotate = true
     controls.enablePan = false

@@ -28,16 +28,16 @@ class ScreenZoom {
   onHover(event: any) {
     this.intersects = !!this.raycaster.intersectObject(this.mesh)[0]
 
-    if (this.intersects && this.screenElement[0]) {
-      this.uiElement?.setAttribute(
+    if (this.intersects && this.screenElement[0] && this.uiElement) {
+      this.uiElement.setAttribute(
         'style',
-        'animation:  hide 1s ease-out forwards;'
+        'animation:  hide .6s ease-out forwards;'
       )
       this.screenElement[0].style.pointerEvents = 'initial'
     } else if (this.screenElement[0] && this.uiElement) {
       this.uiElement?.setAttribute(
         'style',
-        'animation:  show 1s ease-in forwards;'
+        'animation:  show .6s ease-in forwards;'
       )
       this.screenElement[0].style.pointerEvents = 'none'
     }
@@ -50,9 +50,11 @@ class ScreenZoom {
     camera.lookAt(this.mesh.position)
     this.raycaster.setFromCamera(this.pointer, camera)
     if (this.intersects) {
-      camera.position.lerp(new THREE.Vector3(0, 19, 14), 0.05)
+      // on focus screen position
+      camera.position.lerp(new THREE.Vector3(0, 19, 14), 0.08)
     } else {
-      camera.position.lerp(new THREE.Vector3(0, 60, 80), 0.025)
+      // default position
+      camera.position.lerp(new THREE.Vector3(0, 60, 80), 0.04)
     }
   }
 }

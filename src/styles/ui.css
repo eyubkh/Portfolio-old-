@@ -23,12 +23,29 @@
   text-align: right;
   user-select: none;
 }
-#ui-content #controls {
+#ui-content #camera {
   margin-top: auto;
 }
-#ui-content #other {
+#ui-content #music {
   margin-top: auto;
   justify-self: end;
+}
+
+#ui-content a {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 5px 10px;
+  cursor: pointer;
+  width: fit-content;
+  background-color: rgb(192, 196, 200);
+  border-radius: 2px;
+  border-width: 2px;
+  border-style: solid;
+  border-top-color: rgb(192, 196, 200, 0.3);
+  border-left-color: rgb(192, 196, 200, 0.3);
+  border-right-color: dimgray;
+  border-bottom-color: dimgray;
 }
 
 @keyframes hide {

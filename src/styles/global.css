@@ -1,9 +1,24 @@
+@font-face {
+  font-family: 'Windows';
+  font-style: normal;
+  font-weight: normal;
+  src:  url(/fonts/w95fa.woff2) format("woff2"), ;
+}
+
+@font-face {
+  font-family: 'Windows';
+  font-weight: bold;
+  font-style: normal;
+  src:  url(/fonts/sysfont.woff2) format("woff2"), ;
+}
+
 html,
 body,
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Windows';
 }
 
 body {

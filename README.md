@@ -30,12 +30,15 @@
 - Website build it with javascript and threejs, inspired by @henryjeff.
 
 ## Todo-list
-[x] Fixing awaiting process to do it on the good order
-[] Fixing the screen borders
-[] Finish ui design
-[] Add sounds
-[] Work on the operative sistem details 
-[] Error handler on touch screen 
-[] Add pre-processing styles
-[] Install prettier and esbuild
+- [x] Fixing awaiting process to do it on the good order
+- [ ] Fixing the screen borders
+- [ ] Finish ui design
+- [x] Adding fonts
+- [ ] Work on the operative sistem details 
+- [ ] Error handler on touch screen 
+- [ ] Add pre-processing styles
+- [x] Install prettier
+- [ ] Add sound effects
+- [ ] Add mouse came move effect
+- [ ] Await ifram to fech befor render component
 

@@ -7,6 +7,8 @@ import Lighting from './components/Lighting'
 import orbitalContrals from './utils/orbitalControls'
 import { screenZoom } from './utils/screenZoom'
 import resizeRenderer from './utils/resizeRenderer'
+import audio from '@assets/audio/start.mp3'
+
 
 export const state = {
   isOrbitalContorl: false,
@@ -33,6 +35,9 @@ class World {
   controls: any
   monitor: Monitor
 
+  startAudio = new Audio(audio)
+
+
   constructor() {
     this.monitor = new Monitor(this.scene, this.cssScene)
     new Environment(this.scene)
@@ -52,6 +57,9 @@ class World {
 
     this.camera.lookAt(0, 0, 0)
     this.camera.position.set(0, 100, 200)
+
+    this.startAudio.volume = 0.5
+    this.startAudio.play()
 
     this.render()
   }
