@@ -1,8 +1,7 @@
 import { state } from '../World'
 import '../styles/ui.css'
-import cameraIcon from '@assets/icons/camera.ICO' 
-import musicIcon from '@assets/icons/music.ICO' 
-
+import cameraIcon from '@assets/icons/camera.png'
+import musicIcon from '@assets/icons/music.png'
 
 class Ui {
   uiElement = document.getElementById('ui')
@@ -25,10 +24,12 @@ class Ui {
             <span>camera</span>
           </a>
 
+          <!-- Coming button
           <a id="music" href="#">
             <img src=${musicIcon} />
             <span>music</span>
-          </a>
+          </a> 
+          -->
         </div>
       `
 
@@ -36,21 +37,24 @@ class Ui {
       if (cameraButton instanceof HTMLAnchorElement) {
         cameraButton.addEventListener('click', () => {
           state.isOrbitalContorl = !state.isOrbitalContorl
-          cameraButton.getElementsByTagName('span')[0].style.textDecoration = state.isOrbitalContorl ? 'line-through' : 'none'
-          document.body.style.cursor = state.isOrbitalContorl ? 'grab' : 'default'  
+          cameraButton.getElementsByTagName('span')[0].style.textDecoration =
+            state.isOrbitalContorl ? 'line-through' : 'none'
+          document.body.style.cursor = state.isOrbitalContorl
+            ? 'grab'
+            : 'default'
         })
       }
 
       const musicButton = document.getElementById('music')
       if (musicButton instanceof HTMLAnchorElement) {
         let isClicked = false
-        
+
         musicButton.addEventListener('click', () => {
           isClicked = !isClicked
-          musicButton.getElementsByTagName('span')[0].style.textDecoration = isClicked ? 'line-through' : 'none'
+          musicButton.getElementsByTagName('span')[0].style.textDecoration =
+            isClicked ? 'line-through' : 'none'
         })
       }
-        
     }
   }
 }

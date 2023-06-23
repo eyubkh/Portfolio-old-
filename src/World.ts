@@ -9,7 +9,6 @@ import { screenZoom } from './utils/screenZoom'
 import resizeRenderer from './utils/resizeRenderer'
 import audio from '@assets/audio/start.mp3'
 
-
 export const state = {
   isOrbitalContorl: false,
 }
@@ -36,7 +35,6 @@ class World {
   monitor: Monitor
 
   startAudio = new Audio(audio)
-
 
   constructor() {
     this.monitor = new Monitor(this.scene, this.cssScene)
