@@ -8,14 +8,14 @@ function orbitControl(camera: THREE.PerspectiveCamera) {
   if (domElement instanceof HTMLDivElement) {
     controls = new OrbitControls(camera, domElement)
 
-    controls.maxDistance = 150
+    controls.maxDistance = 110
     controls.minDistance = 20
     controls.maxPolarAngle = Math.PI / 2.5
     controls.autoRotate = true
     controls.enablePan = false
     controls.autoRotateSpeed = 0.3
-    controls.minAzimuthAngle = -Math.PI / 3.3
-    controls.maxAzimuthAngle = Math.PI / 3.3
+    controls.minAzimuthAngle = -Math.PI / 2.8
+    controls.maxAzimuthAngle = Math.PI / 2.8
   }
 
   return controls

@@ -8,7 +8,7 @@ import orbitalContrals from './utils/orbitalControls'
 import { screenZoom } from './utils/screenZoom'
 import resizeRenderer from './utils/resizeRenderer'
 import audio from '@assets/audio/start.mp3'
-import { PostProcessing } from './components/PostProcessing'
+// import { PostProcessing } from './components/PostProcessing'
 
 export const state = {
   isOrbitalContorl: false,
@@ -25,7 +25,7 @@ class World {
   cssScene = new THREE.Scene()
   cssRenderer = new CSS3DRenderer()
   cssElement = window.document.querySelector('#css')
-  postProcessing: PostProcessing
+  // postProcessing: PostProcessing
 
   camera = new THREE.PerspectiveCamera(
     75,
@@ -42,7 +42,7 @@ class World {
     this.monitor = new Monitor(this.scene, this.cssScene)
     new Environment(this.scene)
     new Lighting(this.scene)
-    this.postProcessing = new PostProcessing(this.renderer, this.scene, this.camera)
+    // this.postProcessing = new PostProcessing(this.renderer, this.scene, this.camera)
 
     this.controls = orbitalContrals(this.camera)
   }

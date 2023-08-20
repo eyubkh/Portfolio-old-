@@ -4,7 +4,7 @@ import { screenZoom } from '../utils/screenZoom'
 import createCSS3DObject from '../utils/createCSS3DObject'
 
 class ScreenMonitor {
-  readonly screenSize = { w: 1280, h: 1052.44 }
+  readonly screenSize = { w: 1280, h: 1052 }
   readonly iframeScale = 0.015
   readonly iframePadding = 32
   readonly iframeSize = {

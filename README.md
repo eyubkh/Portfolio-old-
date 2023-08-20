@@ -33,6 +33,7 @@
 - [x] Fixing awaiting process to do it on the good order
 - [x] Adding fonts
 - [x] Install prettier
+- [x] Free camera on max zoom out you can see outside.
 - [ ] Fixing the screen borders
 - [ ] Finish ui design
 - [ ] Work on the operative sistem details 
@@ -43,8 +44,7 @@
 - [ ] Await ifram to fech befor render component
 - [ ] Fixing camera toggle error in chrome
 - [ ] Fixing screen in safary
-
-#### bugs
-- [ ] safari the screen is shifted down.
+- [ ] On safari the screen is shifted down.
+- [ ] Screen still fetching while removing terminal.
 
 
