@@ -19,13 +19,18 @@
 #ui-content #logo svg {
   width: 50px;
 }
+
 #ui-content #name {
   text-align: right;
   user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
+
 #ui-content #camera {
   margin-top: auto;
 }
+
 #ui-content #music {
   margin-top: auto;
   justify-self: end;
@@ -53,9 +58,11 @@
     opacity: 1;
     left: 0;
   }
+
   90% {
     left: 0;
   }
+
   100% {
     left: -100vw;
     opacity: 0;
@@ -66,6 +73,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

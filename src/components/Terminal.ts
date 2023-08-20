@@ -37,7 +37,7 @@ class Terminal {
       await this.addTerminalText(loadingData.text[6], 400)
       await this.addTerminalText(loadingData.text[7], 300)
       await this.clearTerminal(300)
-      await this.clearTerminal(1000)
+      await this.clearTerminal(200)
     }
   }
 

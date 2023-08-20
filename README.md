@@ -31,14 +31,20 @@
 
 ## Todo-list
 - [x] Fixing awaiting process to do it on the good order
+- [x] Adding fonts
+- [x] Install prettier
 - [ ] Fixing the screen borders
 - [ ] Finish ui design
-- [x] Adding fonts
 - [ ] Work on the operative sistem details 
 - [ ] Error handler on touch screen 
-- [ ] Add pre-processing styles
-- [x] Install prettier
+- [ ] Add pre-processing styles (doing)
 - [ ] Add sound effects
 - [ ] Add mouse came move effect
 - [ ] Await ifram to fech befor render component
+- [ ] Fixing camera toggle error in chrome
+- [ ] Fixing screen in safary
+
+#### bugs
+- [ ] safari the screen is shifted down.
+
 
